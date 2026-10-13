@@ -25,7 +25,7 @@ The config disables dependency prebundling for this static, zero-framework site 
 
 ## Design and accessibility
 
-Charcoal / warm white / lime palette, responsive grids, semantic landmarks, a skip link, visible focus rings, native links, a mobile menu with expanded state and Escape handling, reduced-motion support, and lazy-loaded project/portrait images. Fonts use Google Fonts with local system fallbacks. No analytics, contact submission, or backend is required.
+Spaghetti-inspired palette: roasted brown / pasta cream / tomato red, with basil green details, responsive grids, semantic landmarks, a skip link, visible focus rings, native links, a mobile menu with expanded state and Escape handling, reduced-motion support, and lazy-loaded project/portrait images. Fonts use Google Fonts with local system fallbacks. No analytics, contact submission, or backend is required.
 
 The supplied inspiration was used for an approachable introduction and project-first structure, with an original visual identity: https://www.jocolomban.com
 
