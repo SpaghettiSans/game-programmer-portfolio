@@ -1,0 +1,19 @@
+---
+import { sitePath } from '../data/urls';
+import { profile } from '../data/portfolio';
+---
+<header class="site-header">
+  <a class="brand" href={sitePath('/')} aria-label="Sandee Srisawat home"><span class="brand-mark" aria-hidden="true">s<span>↗</span></span><span>Sandee Srisawat<span class="brand-sub">GAME PROGRAMMER</span></span></a>
+  <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">Menu <span aria-hidden="true">＋</span></button>
+  <nav id="main-nav" aria-label="Main navigation">
+    <a href={sitePath('/#projects')}>Projects</a><a href={sitePath('/#about')}>About</a><a href={sitePath('/#skills')}>Skills</a><a href={sitePath('/#contact')}>Contact</a>
+    {profile.resume ? <a class="nav-resume" href={profile.resume}>Resume ↗</a> : <a class="nav-resume" href={sitePath('/#resume-status')}>Resume <span aria-hidden="true">↗</span></a>}
+  </nav>
+</header>
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = document.querySelector('#main-nav');
+  toggle?.addEventListener('click', () => { const open = toggle.getAttribute('aria-expanded') !== 'true'; toggle.setAttribute('aria-expanded', String(open)); nav?.classList.toggle('open', open); });
+  nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { toggle?.setAttribute('aria-expanded', 'false'); nav.classList.remove('open'); }));
+  document.addEventListener('keydown', event => { if(event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') { toggle.setAttribute('aria-expanded', 'false'); nav?.classList.remove('open'); toggle.focus(); } });
+</script>

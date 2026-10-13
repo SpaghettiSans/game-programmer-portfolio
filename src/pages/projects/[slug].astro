@@ -1,0 +1,8 @@
+---
+import { projects } from '../../data/portfolio';
+import Layout from '../../layouts/Layout.astro';
+import ProjectBreakdown from '../../components/ProjectBreakdown.astro';
+export function getStaticPaths() { return projects.map(project => ({ params: { slug: project.slug }, props: { project } })); }
+const { project } = Astro.props;
+---
+<Layout title={`${project.category} — Sandee Srisawat`} description={`${project.sample ? 'Sample project breakdown: ' : ''}${project.description}`}><ProjectBreakdown project={project}/></Layout>

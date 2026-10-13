@@ -1,0 +1,46 @@
+// All personal content lives here. null links stay visibly unavailable.
+export const profile = {
+  name: 'Sandee Srisawat',
+  headline: 'Building the systems behind the play.',
+  intro: 'I’m a game programmer interested in creating responsive gameplay, thoughtful systems, and memorable player experiences.',
+  about: 'I’m interested in the details that make a game feel good to play: responsive controls, thoughtful interactions, and systems that work together.',
+  approach: 'This space is for my story: how I approach a difficult problem, what I enjoy building, and what draws me to game programming. I’ll add that story alongside my work.',
+  email: 'sandee.srisawat2003@gmail.com' as string | null,
+  github: 'https://github.com/SpaghettiSans' as string | null,
+  itch: null as string | null,
+  linkedin: null as string | null,
+  resume: null as string | null,
+  portrait: null as string | null,
+  heroMedia: null as string | null,
+  heroMediaType: 'image' as 'image' | 'video',
+  heroMediaAlt: 'Gameplay footage from a featured project',
+  heroCaptions: null as string | null,
+  heroTranscript: null as string | null,
+  aboutConfirmed: false,
+  skillsConfirmed: false,
+  siteUrl: 'https://spaghettisans.github.io',
+};
+export const projects = [
+  { slug: 'gameplay-systems', number: '01', category: 'Gameplay Systems', title: '[Project Title]', description: 'A space to explore a character controller, combat mechanic, or interaction system.', role: 'Individual contribution to be added', engine: 'Engine TBC', language: 'Language TBC', type: 'Prototype · example', team: 'To be confirmed', duration: 'To be confirmed', theme: 'terrain', media: null, mediaType: 'image', mediaAlt: 'Project gameplay screenshot', play: null, source: null, trailer: null, documentation: null },
+  { slug: 'ai-game-logic', number: '02', category: 'AI & Game Logic', title: '[Project Title]', description: 'A space to explain enemy behavior, decision-making, or an interconnected gameplay system.', role: 'Individual contribution to be added', engine: 'Engine TBC', language: 'Language TBC', type: 'Team · example', team: 'To be confirmed', duration: 'To be confirmed', theme: 'logic', media: null, mediaType: 'image', mediaAlt: 'AI behavior screenshot', play: null, source: null, trailer: null, documentation: null },
+  { slug: 'tools-experiments', number: '03', category: 'Tools & Experiments', title: '[Project Title]', description: 'A space to share a development tool, technical prototype, or optimization experiment.', role: 'Individual contribution to be added', engine: 'Engine TBC', language: 'Language TBC', type: 'Solo · example', team: 'To be confirmed', duration: 'To be confirmed', theme: 'tools', media: null, mediaType: 'image', mediaAlt: 'Development tool screenshot', play: null, source: null, trailer: null, documentation: null },
+].map(project => ({ ...project,
+  sample: true,
+  overview: 'This is a sample project breakdown, ready for a real project. The prompts below describe what to add; they do not represent completed work or experience.',
+  contributions: ['Describe the feature you personally implemented and what it enabled for the player.', 'Explain your implementation choices and how your work connected with the rest of the project.', 'Separate your own contributions from the work of teammates.'],
+  problem: 'Describe a specific technical constraint or gameplay problem you encountered.',
+  solution: 'Explain the options you considered, the approach you chose, and the tradeoffs involved.',
+  outcome: 'Add the observed result and supporting evidence. Include performance numbers only when measured.',
+  learned: 'Explain what this project taught you and what you would change in a future iteration.',
+  diagram: null as string | null,
+  code: null as string | null,
+  captions: null as string | null,
+  transcript: null as string | null,
+}));
+export type Project = typeof projects[number];
+export const skills = [
+  { title: 'Programming languages', items: ['C++', 'C#'] },
+  { title: 'Game engines', items: ['Unreal Engine', 'Unity'] },
+  { title: 'Gameplay & systems', items: ['Gameplay programming', 'Debugging', 'Profiling'] },
+  { title: 'Development tools', items: ['Git', 'Development tools TBC'] },
+];

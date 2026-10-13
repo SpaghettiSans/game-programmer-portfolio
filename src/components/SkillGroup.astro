@@ -1,0 +1,4 @@
+---
+const { group, index } = Astro.props;
+---
+<div class="skill-group"><span class="eyebrow">0{index + 1}</span><h3>{group.title}</h3><div class="tags">{group.items.map((item: string) => <span>{item}</span>)}</div></div>

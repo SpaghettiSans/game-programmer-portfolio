@@ -1,0 +1,12 @@
+---
+interface Props { theme?: string; src?: string | null; type?: string; alt?: string; hero?: boolean; captions?: string | null; transcript?: string | null; }
+const { theme = 'terrain', src, type = 'image', alt = 'Gameplay preview', hero = false, captions, transcript } = Astro.props;
+---
+<div class:list={['media-panel', theme, { 'hero-media': hero }]}>
+  {src ? (type === 'video' ? <video src={src} controls preload="metadata" aria-label={alt}>{captions && <track kind="captions" src={captions} srclang="en" label="English" default/>}Your browser does not support video.</video> : <img src={src} alt={alt} loading={hero ? 'eager' : 'lazy'} />) : <>
+    <div class="media-top"><span><i></i> {hero ? 'SANDBOX / SCENE_001' : 'PROJECT PREVIEW'}</span><span>PLACEHOLDER</span></div>
+    <div class="scene" aria-hidden="true"><div class="grid-floor"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="cube"><span></span></div><div class="coordinate x">X</div><div class="coordinate y">Y</div><div class="scene-cross cross-one">+</div><div class="scene-cross cross-two">+</div></div>
+    <div class="media-bottom"><div><span class="eyebrow">{hero ? 'A SPACE FOR YOUR NEXT WORLD' : 'AWAITING REAL PROJECT MEDIA'}</span><strong>Gameplay preview<span aria-hidden="true"> ↗</span></strong></div><span class="frame-label">16:9<br/>NO MEDIA LOADED</span></div>
+  </>}
+</div>
+{src && type === 'video' && transcript && <p class="media-transcript">{transcript}</p>}
