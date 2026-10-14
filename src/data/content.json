@@ -25,7 +25,7 @@
       "slug": "gameplay-systems",
       "number": "01",
       "category": "Gameplay Systems",
-      "title": "[Project Title]",
+      "title": "Project SeaShelt",
       "description": "A space to explore a character controller, combat mechanic, or interaction system.",
       "role": "Individual contribution to be added",
       "engine": "Engine TBC",
@@ -61,7 +61,7 @@
       "slug": "ai-game-logic",
       "number": "02",
       "category": "AI & Game Logic",
-      "title": "[Project Title]",
+      "title": "Elizabeth",
       "description": "A space to explain enemy behavior, decision-making, or an interconnected gameplay system.",
       "role": "Individual contribution to be added",
       "engine": "Engine TBC",
@@ -97,7 +97,7 @@
       "slug": "tools-experiments",
       "number": "03",
       "category": "Tools & Experiments",
-      "title": "[Project Title]",
+      "title": "Zombid - 19",
       "description": "A space to share a development tool, technical prototype, or optimization experiment.",
       "role": "Individual contribution to be added",
       "engine": "Engine TBC",
@@ -135,14 +135,19 @@
       "title": "Programming languages",
       "items": [
         "C++",
-        "C#"
+        "C#",
+        "Python",
+        "Java",
+        "JavaScript",
+        "TypeScript"
       ]
     },
     {
       "title": "Game engines",
       "items": [
         "Unreal Engine",
-        "Unity"
+        "Unity",
+        "Godot"
       ]
     },
     {
@@ -157,7 +162,7 @@
       "title": "Development tools",
       "items": [
         "Git",
-        "Development tools TBC"
+        "Perforce"
       ]
     }
   ]
