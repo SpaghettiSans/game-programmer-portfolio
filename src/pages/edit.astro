@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import content from '../data/content.json';
+import { sitePath } from '../data/urls';
+import '../styles/editor.css';
+---
+<Layout title="Edit portfolio — Sandee Srisawat" description="A visual editor for portfolio content." noindex>
+  <div class="wrap editor" data-editor data-initial={JSON.stringify(content)}>
+    <a class="text-link" href={sitePath('/')}>← Back to portfolio</a>
+    <div class="editor-heading"><div><span class="eyebrow accent">YOUR PORTFOLIO WORKSPACE</span><h1>Make it yours.</h1><p>Add your work, tell your story, and keep everything up to date.</p></div><button class="button primary" id="publish" type="button">Publish changes ↗</button></div>
+    <div class="editor-status"><p id="save-status" role="status" aria-live="polite">Loading editor…</p><div><button class="editor-small" id="download" type="button">Download backup</button><label class="editor-small import-label">Import backup<input id="import" type="file" accept="application/json,.json"/></label><button class="editor-small" id="reset" type="button">Reset draft</button></div></div>
+    <div id="editor-alert" class="notice" role="alert" hidden></div>
+    <p class="editor-help">Drafts stay in this browser until you publish. Publishing takes three steps through your GitHub account. Changes are public once committed. For images, videos, and your resume, <a href="https://github.com/SpaghettiSans/game-programmer-portfolio/upload/main/public" target="_blank" rel="noopener">upload files to GitHub ↗</a>, then use <code>/game-programmer-portfolio/filename.webp</code>.</p>
+    <nav class="editor-tabs" aria-label="Editor sections"><a href="#edit-projects">Projects</a><a href="#edit-profile">About & links</a><a href="#edit-skills">Skills</a></nav>
+    <form id="content-form">
+      <section id="edit-projects" class="editor-section"><div class="editor-section-title"><div><h2>Your projects</h2><p>Use Move up and Move down to reorder. Each project gets its own page.</p></div><button type="button" class="button secondary" id="add-project">＋ Add project</button></div><div id="project-list"></div></section>
+      <section id="edit-profile" class="editor-section"><h2>About you & your links</h2><div id="profile-fields" class="field-grid"></div></section>
+      <section id="edit-skills" class="editor-section"><div class="editor-section-title"><h2>Skill groups</h2><button type="button" class="button secondary" id="add-skill">＋ Add group</button></div><div id="skill-list"></div></section>
+    </form>
+    <noscript><p>This editor needs JavaScript. You can still edit <a href="https://github.com/SpaghettiSans/game-programmer-portfolio/edit/main/src/data/content.json">the content file on GitHub</a>.</p></noscript>
+    <dialog id="publish-dialog" aria-labelledby="publish-title"><div class="publish-inner"><button type="button" class="editor-small dialog-close" id="close-publish" aria-label="Close publish instructions">Close ×</button><h2 id="publish-title">Publish your changes</h2><p>Nothing is uploaded automatically. You’ll confirm the final save in GitHub.</p><ol><li><strong>Copy your content.</strong> Use the button below. If copying is unavailable, select the text and copy it manually.</li><li><strong>Open GitHub.</strong> Sign in as SpaghettiSans. Click inside the file editor, select all existing text, and paste the copied content.</li><li><strong>Commit changes.</strong> Choose “Commit directly to the main branch.” Your website updates after the deployment finishes, usually within a minute or two.</li></ol><div class="publish-actions"><button class="button primary" id="copy-content" type="button">1. Copy content</button><a class="button secondary" href="https://github.com/SpaghettiSans/game-programmer-portfolio/edit/main/src/data/content.json" target="_blank" rel="noopener">2. Open GitHub ↗</a></div><p id="copy-status" role="status" aria-live="polite"></p><label for="publish-json">Generated content — copy all of this</label><textarea id="publish-json" readonly spellcheck="false" rows="8"></textarea><p><a href="https://github.com/SpaghettiSans/game-programmer-portfolio/actions" target="_blank" rel="noopener">Check deployment status ↗</a>. After publishing, reload this editor to pick up the live version.</p></div></dialog>
+  </div>
+  <script>import '../scripts/editor';</script>
+</Layout>
