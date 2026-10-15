@@ -3,6 +3,39 @@ import { sitePath } from '../data/urls';
 import Media from './Media.astro';
 import type { Project } from '../data/portfolio';
 const { project: p } = Astro.props as { project: Project };
-const links = [{label:'Play build',url:p.play},{label:'Source code',url:p.source},{label:'Watch trailer',url:p.trailer},{label:'Documentation',url:p.documentation}];
+const links = [{label:'Play build',url:p.play},{label:'Source code',url:p.source},{label:'Watch trailer',url:p.trailer},{label:'Documentation',url:p.documentation}].filter(link => link.url);
+const showcase = p.showcase || [];
+const paragraphs = (p.challengesTakeaways || '').split(/\n\s*\n/).filter(text => text.trim());
 ---
-<article class="wrap breakdown"><a class="text-link back-link" href={sitePath('/#projects')}>← All projects</a><div class="eyebrow accent">{p.number} / {p.category} {p.sample && '· SAMPLE BREAKDOWN'}</div><h1>{p.title}<span class="accent">.</span></h1><p class="breakdown-intro">{p.description}</p><div class="notice"><span class="notice-icon">i</span><p>{p.overview}</p></div><Media theme={p.theme} src={p.media} type={p.mediaType} alt={p.mediaAlt} captions={p.captions} transcript={p.transcript}/><dl class="facts">{[{label:'Role',value:p.role},{label:'Engine',value:p.engine},{label:'Language',value:p.language},{label:'Team size',value:p.team},{label:'Duration',value:p.duration}].map(f => <div><dt>{f.label}</dt><dd>{f.value}</dd></div>)}</dl><div class="breakdown-body"><aside><span class="eyebrow">IN THIS BREAKDOWN</span><a href="#built">What I Built</a><a href="#challenges">Technical Challenges</a><a href="#architecture">Under the Hood</a><a href="#learned">What I Learned</a></aside><div><section id="built"><span class="eyebrow accent">01 / CONTRIBUTIONS</span><h2>What I Built</h2><ul>{p.contributions.map(item => <li>{item}</li>)}</ul></section><section id="challenges"><span class="eyebrow accent">02 / PROBLEM SOLVING</span><h2>Technical Challenges</h2><h3>The problem</h3><p>{p.problem}</p><h3>The approach</h3><p>{p.solution}</p><h3>The outcome</h3><p>{p.outcome}</p></section><section id="architecture"><span class="eyebrow accent">03 / UNDER THE HOOD</span><h2>Make the thinking visible.</h2>{p.diagram ? <img class="diagram" src={p.diagram} alt="Project architecture diagram" loading="lazy"/> : <div class="diagram-placeholder"><span aria-hidden="true">[ INPUT ] → [ SYSTEM ] → [ OUTPUT ]</span><p>Architecture diagram / annotated screenshot</p><small>Add a diagram and an explanation of how the pieces connect.</small></div>}{p.code ? <pre><code>{p.code}</code></pre> : <div class="code-placeholder"><span>CODE EXCERPT / TO BE ADDED</span><p>Add a short, relevant snippet and explain the decision it illustrates.</p></div>}</section><section id="learned"><span class="eyebrow accent">04 / REFLECTION</span><h2>What I Learned</h2><p>{p.learned}</p></section><div class="project-resources"><h3>Explore the project</h3>{links.some(l=>l.url) ? links.filter(l=>l.url).map(l=><a class="button secondary" href={l.url!}>{l.label} ↗</a>) : <p>Playable build, repository, trailer, and documentation links have not been added yet.</p>}</div></div></div><a class="button primary" href={sitePath('/#projects')}>Back to all projects <span>↗</span></a></article>
+<article class="wrap breakdown project-detail">
+  <a class="text-link back-link" href={sitePath('/#projects')}>← All projects</a>
+  <header class="project-detail-header">
+    <span class="eyebrow accent">{p.category}{p.sample && ' · SAMPLE PROJECT'}</span>
+    <h1>{p.title}<span class="accent">.</span></h1>
+    <div class="tags">{[p.engine,p.language,p.type].filter(Boolean).map(tag => <span>{tag}</span>)}</div>
+  </header>
+  <section class="project-detail-section" aria-labelledby="about-project">
+    <h2 id="about-project">About project</h2>
+    {p.role && <p class="project-role"><strong>Role:</strong> {p.role}</p>}
+    {p.description && <p>{p.description}</p>}
+    {(p.team || p.duration) && <p class="project-small-facts">{p.team && <span>Team: {p.team}</span>}{p.duration && <span>Duration: {p.duration}</span>}</p>}
+  </section>
+  {p.contributions.length > 0 && <section class="project-detail-section" aria-labelledby="contributions">
+    <h2 id="contributions">Technical Contributions</h2>
+    <ul>{p.contributions.map(item => <li>{item}</li>)}</ul>
+  </section>}
+  {paragraphs.length > 0 && <section class="project-detail-section" aria-labelledby="takeaways">
+    <h2 id="takeaways">Challenges & Takeaways</h2>
+    {paragraphs.map(text => <p class="project-paragraph">{text}</p>)}
+  </section>}
+  <section class="project-detail-section project-showcase" aria-labelledby="showcase">
+    <h2 id="showcase">Showcase</h2>
+    {showcase.length ? showcase.map(item => <figure>
+      {item.type === 'video' ? <video src={item.src} controls preload="metadata" aria-label={item.alt}>{item.captions && <track kind="captions" src={item.captions} srclang="en" label="English" default/>}Your browser does not support video.</video> : <a href={item.src} target="_blank" rel="noopener" aria-label={`Open full image: ${item.alt}`}><img src={item.src} alt={item.alt} loading="lazy"/></a>}
+      {item.caption && <figcaption>{item.caption}</figcaption>}
+      {item.type === 'video' && item.transcript && <p>{item.transcript}</p>}
+    </figure>) : <Media theme={p.theme}/>}
+  </section>
+  {links.length > 0 && <div class="project-detail-links">{links.map(link => <a class="button secondary" href={link.url!}>{link.label} ↗</a>)}</div>}
+  <a class="text-link" href={sitePath('/#projects')}>← Back to all projects</a>
+</article>

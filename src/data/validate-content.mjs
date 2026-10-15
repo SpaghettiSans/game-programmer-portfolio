@@ -35,6 +35,19 @@ export function validateContent(data) {
     for (const key of ['media','play','source','trailer','documentation','diagram','captions']) url(project[key],`${label} ${key}`);
     for (const key of ['code','transcript']) if (project[key] !== null) text(project[key],`${label} ${key}`);
     list(project.contributions,`${label} contributions`);
+    if (project.challengesTakeaways !== undefined) text(project.challengesTakeaways,`${label} challenges and takeaways`);
+    if (project.showcase !== undefined) {
+      if (!Array.isArray(project.showcase) || project.showcase.length > 30) fail(`${label}: use up to 30 showcase items.`);
+      project.showcase.forEach((item,i) => {
+        const itemLabel = `${label} showcase ${i + 1}`;
+        text(item.src,`${itemLabel} URL`,true); url(item.src,itemLabel);
+        text(item.alt,`${itemLabel} description`,true);
+        text(item.caption,`${itemLabel} caption`);
+        if (!['image','video'].includes(item.type)) fail(`${itemLabel}: choose image or video.`);
+        url(item.captions,`${itemLabel} captions URL`);
+        if (item.transcript !== null) text(item.transcript,`${itemLabel} transcript`);
+      });
+    }
     if (typeof project.sample !== 'boolean') fail(`${label}: sample must be checked or unchecked.`);
     if (!['terrain','logic','tools'].includes(project.theme) || !['image','video'].includes(project.mediaType)) fail(`${label}: invalid preview style or media type.`);
   });

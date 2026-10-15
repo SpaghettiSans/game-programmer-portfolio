@@ -1,4 +1,5 @@
 import { validateContent } from '../data/validate-content.mjs';
+import { normalizeContent } from '../data/normalize-content.mjs';
 import type { PortfolioContent, Project } from '../data/portfolio';
 
 const root = document.querySelector<HTMLElement>('[data-editor]')!;
@@ -22,6 +23,7 @@ try {
     }
   }
 } catch { message('Your saved draft could not be loaded. Starting with the published content.'); }
+data = normalizeContent(data);
 function save() {
   data.projects.forEach((project,index) => project.number = String(index + 1).padStart(2,'0'));
   try {
@@ -68,14 +70,39 @@ const projectBasics: Spec[] = [
   ['title','Project title'],['slug','Page address','text','Use a unique address such as my-first-game. Changing it changes the project URL.'],
   ['category','Category'],['description','Short description','long'],['sample','Mark as sample content','check'],
   ['role','Your role'],['engine','Engine'],['language','Programming language'],['type','Project type'],['team','Team size'],['duration','Duration'],
-  ['media','Gameplay image or video URL','nullable'],['mediaType','Media type','image|video'],['mediaAlt','Media description'],['theme','Placeholder style','terrain|logic|tools'],
+  ['media','Homepage card preview URL (optional)','nullable'],['mediaType','Media type','image|video'],['mediaAlt','Media description'],['theme','Placeholder style','terrain|logic|tools'],
 ];
 const projectDetails: Spec[] = [
-  ['overview','Overview','long'],['contributions','What you built','lines','One contribution per line.'],
-  ['problem','Technical problem','long'],['solution','Your approach','long'],['outcome','Outcome','long'],['learned','What you learned','long'],
-  ['diagram','Architecture diagram URL','nullable'],['code','Code excerpt','nullable-long'],['captions','Video captions URL (.vtt)','nullable'],['transcript','Video transcript','nullable-long'],
+  ['contributions','Technical Contributions','lines','One contribution per line. Describe what you personally built.'],
+  ['challengesTakeaways','Challenges & Takeaways','long','Write about a challenge, how you handled it, and what you learned. Use blank lines between paragraphs.'],
+];
+const projectLinks: Spec[] = [
   ['play','Playable build URL','nullable'],['source','Source repository URL','nullable'],['trailer','Trailer URL','nullable'],['documentation','Documentation URL','nullable'],
 ];
+function renderShowcase(parent: HTMLElement, project: Project) {
+  const box = document.createElement('fieldset');
+  const legend = document.createElement('legend');legend.textContent = 'Showcase';box.append(legend);
+  const help = document.createElement('p');help.textContent = 'Images appear at the bottom of the project page in this order. Add a screenshot, gameplay clip, or diagram.';box.append(help);
+  const items = document.createElement('div');
+  const renderItems = () => {
+    items.replaceChildren();
+    project.showcase!.forEach((item,index) => {
+      const {box: cardBox, body}=card(`Showcase item ${index + 1}`,true);
+      const actions=document.createElement('div');actions.className='editor-actions';
+      const move=(delta:number)=>{const list=project.showcase!;[list[index],list[index+delta]]=[list[index+delta],list[index]];save();renderItems();};
+      actions.append(button('Move up',()=>move(-1),index===0),button('Move down',()=>move(1),index===project.showcase!.length-1),button('Remove media',()=>{
+        if(confirm('Remove this showcase item from your draft?')){project.showcase!.splice(index,1);save();renderItems();}
+      }));body.append(actions);
+      fields(body,item,[['src','Image or video file URL','text','Use a full https:// URL or /game-programmer-portfolio/filename.webp.'],['type','Media type','image|video'],['alt','Image / video description','text','Describe what the screenshot or clip shows.'],['caption','Caption (optional)'],['captions','Video captions URL (.vtt, optional)','nullable'],['transcript','Video transcript (optional)','nullable-long']]);
+      items.append(cardBox);
+    });
+  };
+  box.append(items);
+  box.append(button('＋ Add showcase media',()=>{
+    if(project.showcase!.length>=30)return message('You can add up to 30 showcase items per project.');
+    project.showcase!.push({src:'',type:'image',alt:'',caption:'',captions:null,transcript:null});save();renderItems();items.lastElementChild?.querySelector('input')?.focus();
+  }));renderItems();parent.append(box);
+}
 function renderProjects(openIndex = -1) {
   const list=byId('project-list');list.replaceChildren();
   if(!data.projects.length) { const p=document.createElement('p');p.className='editor-empty';p.textContent='No projects yet. Add your first project above.';list.append(p); }
@@ -87,8 +114,8 @@ function renderProjects(openIndex = -1) {
       if(confirm(`Remove “${p.title}” from your draft? Your live site stays unchanged until you publish.`)){data.projects.splice(index,1);save();renderProjects();byId('add-project').focus();}
     }));body.append(actions);
     fields(body,p,projectBasics,()=>summary.textContent=`${index+1}. ${p.title || 'Untitled project'}`);
-    const more=document.createElement('details');more.className='editor-card';const heading=document.createElement('summary');heading.textContent='Project breakdown & links';more.append(heading);
-    const detailsBody=document.createElement('div');detailsBody.className='editor-card-body';fields(detailsBody,p,projectDetails);more.append(detailsBody);body.append(more);list.append(box);
+    const more=document.createElement('details');more.className='editor-card';const heading=document.createElement('summary');heading.textContent='Contributions, takeaways & showcase';more.append(heading);
+    const detailsBody=document.createElement('div');detailsBody.className='editor-card-body';fields(detailsBody,p,projectDetails);renderShowcase(detailsBody,p);fields(detailsBody,p,projectLinks);more.append(detailsBody);body.append(more);list.append(box);
   });
 }
 function renderProfile() {
@@ -112,7 +139,7 @@ function render() { renderProjects();renderProfile();renderSkills();save(); }
 byId('add-project').addEventListener('click',()=>{
   if(data.projects.length>=50) return message('You can add up to 50 projects.');
   let i=1;while(data.projects.some(p=>p.slug===`new-project-${i}`))i++;
-  const p: Project={slug:`new-project-${i}`,number:'',category:'Gameplay',title:'New project',description:'',role:'',engine:'',language:'',type:'',team:'',duration:'',theme:'terrain',media:null,mediaType:'image',mediaAlt:'Gameplay preview',play:null,source:null,trailer:null,documentation:null,sample:false,overview:'',contributions:[],problem:'',solution:'',outcome:'',learned:'',diagram:null,code:null,captions:null,transcript:null};
+  const p: Project={slug:`new-project-${i}`,number:'',category:'Gameplay',title:'New project',description:'',role:'',engine:'',language:'',type:'',team:'',duration:'',theme:'terrain',media:null,mediaType:'image',mediaAlt:'Gameplay preview',play:null,source:null,trailer:null,documentation:null,sample:false,overview:'',contributions:[],problem:'',solution:'',outcome:'',learned:'',diagram:null,code:null,captions:null,transcript:null,challengesTakeaways:'',showcase:[]};
   data.projects.push(p);save();renderProjects(data.projects.length-1);byId('project-list').lastElementChild?.querySelector('input')?.focus();
 });
 byId('add-skill').addEventListener('click',()=>{if(data.skills.length>=20)return message('You can add up to 20 skill groups.');data.skills.push({title:'New skill group',items:[]});save();renderSkills();byId('skill-list').lastElementChild?.querySelector('input')?.focus();});
@@ -122,10 +149,10 @@ byId('download').addEventListener('click',()=>{
 });
 byId<HTMLInputElement>('import').addEventListener('change',async event=>{
   const input=event.target as HTMLInputElement;const file=input.files?.[0];if(!file)return;
-  try {if(file.size>2000000)throw Error('Choose a backup under 2 MB.');const imported=validateContent(JSON.parse(await file.text()));if(confirm('Replace this browser draft with the imported content?')){data=imported;stale=false;message('Backup imported. Review it before publishing.');render();}}
+  try {if(file.size>2000000)throw Error('Choose a backup under 2 MB.');const imported=validateContent(JSON.parse(await file.text()));if(confirm('Replace this browser draft with the imported content?')){data=normalizeContent(imported);stale=false;message('Backup imported. Review it before publishing.');render();}}
   catch(error){message(error instanceof Error?error.message:'Could not import that file.');}finally{input.value='';}
 });
-byId('reset').addEventListener('click',()=>{if(confirm('Discard this browser draft and restore the content loaded with this page?')){data=structuredClone(initial);stale=false;message('');render();}});
+byId('reset').addEventListener('click',()=>{if(confirm('Discard this browser draft and restore the content loaded with this page?')){data=normalizeContent(initial);stale=false;message('');render();}});
 const dialog=byId<HTMLDialogElement>('publish-dialog');
 byId('close-publish').addEventListener('click',()=>dialog.close());
 byId('publish').addEventListener('click',async()=>{
