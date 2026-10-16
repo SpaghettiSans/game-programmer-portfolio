@@ -26,14 +26,14 @@
       "number": "01",
       "category": "Gameplay Systems",
       "title": "Project SeaShelt",
-      "description": "A space to explore a character controller, combat mechanic, or interaction system.",
-      "role": "Individual contribution to be added",
+      "description": "A mobile game commissioned for an event, developed in Unity. I worked as a freelance game developer, designing levels and implementing gameplay systems including health, armor, obstacles, and sun exposure with protective shade.",
+      "role": "Game Programmer/ Level Designer",
       "engine": "Unity",
       "language": "C#",
       "type": "Solo",
       "team": "1",
       "duration": "3 weeks",
-      "theme": "terrain",
+      "theme": "logic",
       "media": null,
       "mediaType": "image",
       "mediaAlt": "Project gameplay screenshot",
@@ -44,9 +44,11 @@
       "sample": false,
       "overview": "This is a sample project breakdown, ready for a real project. The prompts below describe what to add; they do not represent completed work or experience.",
       "contributions": [
-        "Describe the feature you personally implemented and what it enabled for the player.",
-        "Explain your implementation choices and how your work connected with the rest of the project.",
-        "Separate your own contributions from the work of teammates."
+        "Designed levels for a mobile game commissioned for an event.",
+        "Built gameplay systems using a component-based architecture.",
+        "Implemented a state-machine-driven GameManager to manage game flow.",
+        "Implemented player health, armor, and obstacle mechanics.",
+        "Created an environmental damage system in which sun exposure damages the player and shade provides protection."
       ],
       "problem": "Describe a specific technical constraint or gameplay problem you encountered.",
       "solution": "Explain the options you considered, the approach you chose, and the tradeoffs involved.",
@@ -56,8 +58,33 @@
       "code": null,
       "captions": null,
       "transcript": null,
-      "challengesTakeaways": "Describe a specific technical constraint or gameplay problem you encountered.\n\nExplain the options you considered, the approach you chose, and the tradeoffs involved.\n\nAdd the observed result and supporting evidence. Include performance numbers only when measured.\n\nExplain what this project taught you and what you would change in a future iteration.",
-      "showcase": []
+      "challengesTakeaways": "One challenge was reliably switching sun damage on and off as the player moved between exposed and shaded areas. I placed colliders to define safe areas, preventing sun damage while the player was inside and resuming it when they left.\n\nAnother challenge was connecting health, armor, obstacles, and environmental damage without tightly coupling their components. I used an event-driven system so components could react to gameplay events while keeping their responsibilities separate.",
+      "showcase": [
+        {
+          "src": "/game-programmer-portfolio/SS_1.png",
+          "type": "image",
+          "alt": "In-game",
+          "caption": "",
+          "captions": null,
+          "transcript": null
+        },
+        {
+          "src": "/game-programmer-portfolio/SS_2.png",
+          "type": "image",
+          "alt": "In-game",
+          "caption": "",
+          "captions": null,
+          "transcript": null
+        },
+        {
+          "src": "/game-programmer-portfolio/SS_3.png",
+          "type": "image",
+          "alt": "In-game",
+          "caption": "",
+          "captions": null,
+          "transcript": null
+        }
+      ]
     },
     {
       "slug": "excorcism-of-elizabeth",
@@ -67,7 +94,7 @@
       "description": "I was responsible for designing and implementing the core interaction, inventory, and time-based event systems for Excorcism of Elizabeth, building a modular and multiplaye-architecture that allowed any actor in the world to become interactable without coupling it to the player character.",
       "role": "Lead Programmer",
       "engine": "Unreal Engine",
-      "language": "Unreal Blueprints",
+      "language": "Blueprints",
       "type": "Team",
       "team": "13",
       "duration": "7 weeks",
@@ -129,15 +156,15 @@
       "title": "Zombid - 19",
       "description": "I was responsible for designing and implementing the slot-based inventory system for Zombid-19 and integrating a designer-provided gun template with it, extending the system with ammunition management, reloading, weapon switching, and audio/visual feedback.",
       "role": "Gameplay Programmer",
-      "engine": "Engine TBC",
-      "language": "Language TBC",
+      "engine": "Unreal Engine",
+      "language": "Blueprints",
       "type": "Team",
       "team": "9",
       "duration": "4 weeks",
       "theme": "logic",
       "media": null,
       "mediaType": "image",
-      "mediaAlt": "Development tool screenshot",
+      "mediaAlt": "Project gameplay screenshot",
       "play": null,
       "source": null,
       "trailer": null,
@@ -162,7 +189,7 @@
       "challengesTakeaways": "With limited time, I extended the gun template and connected it to our custom inventory. This saved development time but required adapting unfamiliar logic.\n\nIncompatible weapon skeletons made muzzle sockets unreliable. I used individually positioned MuzzlePoint components as a practical workaround.\n\nI learned to connect separate gameplay systems, handle interrupted actions, and prioritise features within our deadline.",
       "showcase": [
         {
-          "src": "/game-programmer-portfolio/Zombid_1.png",
+          "src": "/game-programmer-portfolio/title.png",
           "type": "image",
           "alt": "In-game screenshot",
           "caption": "",
@@ -170,7 +197,15 @@
           "transcript": null
         },
         {
-          "src": "/game-programmer-portfolio/Zombid_2.png",
+          "src": "/game-programmer-portfolio/Z_1.png",
+          "type": "image",
+          "alt": "In-game screenshot",
+          "caption": "",
+          "captions": null,
+          "transcript": null
+        },
+        {
+          "src": "/game-programmer-portfolio/Z_2.png",
           "type": "image",
           "alt": "In-game screenshot",
           "caption": "",
