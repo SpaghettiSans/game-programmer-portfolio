@@ -70,7 +70,7 @@ const projectBasics: Spec[] = [
   ['title','Project title'],['slug','Page address','text','Use a unique address such as my-first-game. Changing it changes the project URL.'],
   ['category','Category'],['description','Short description','long'],['sample','Mark as sample content','check'],
   ['role','Your role'],['engine','Engine'],['language','Programming language'],['type','Project type'],['team','Team size'],['duration','Duration'],
-  ['media','Homepage card preview URL (optional)','nullable'],['mediaType','Media type','image|video'],['mediaAlt','Media description'],['theme','Placeholder style','terrain|logic|tools'],
+  ['media','Homepage card preview URL (optional)','nullable','Leave blank to use the first showcase image automatically.'],['mediaType','Media type','image|video'],['mediaAlt','Media description'],['theme','Placeholder style','terrain|logic|tools'],
 ];
 const projectDetails: Spec[] = [
   ['contributions','Technical Contributions','lines','One contribution per line. Describe what you personally built.'],

@@ -3,9 +3,12 @@ import { sitePath } from '../data/urls';
 import Media from './Media.astro';
 import type { Project } from '../data/portfolio';
 const { project: p } = Astro.props as { project: Project };
+const preview = p.media
+  ? { src: p.media, type: p.mediaType, alt: p.mediaAlt }
+  : p.showcase?.find(item => item.type === 'image' && item.src);
 ---
 <article class="project-card">
-  <a class="project-image-link" href={sitePath(`/projects/${p.slug}/`)} aria-label={`View ${p.category} sample breakdown`}><Media theme={p.theme} src={p.media} type={p.mediaType} alt={p.mediaAlt}/></a>
+  <a class="project-image-link" href={sitePath(`/projects/${p.slug}/`)} aria-label={`View ${p.category} sample breakdown`}><Media theme={p.theme} src={preview?.src} type={preview?.type} alt={preview?.alt}/></a>
   <div class="project-meta"><span>{p.number} / {p.category}</span>{p.sample && <span class="sample-badge">SAMPLE PROJECT</span>}</div>
   <h3><a href={sitePath(`/projects/${p.slug}/`)}>{p.title}<span aria-hidden="true">↗</span></a></h3>
   <p>{p.description}</p><p class="contribution"><span>MY ROLE</span>{p.role}</p>
