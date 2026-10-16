@@ -156,18 +156,23 @@ byId('reset').addEventListener('click',()=>{if(confirm('Discard this browser dra
 const dialog=byId<HTMLDialogElement>('publish-dialog');
 byId('close-publish').addEventListener('click',()=>dialog.close());
 byId('publish').addEventListener('click',async()=>{
+  const steps=byId('publish-steps');
+  const feedback=byId('publish-feedback');
+  steps.hidden=true;
+  feedback.textContent='Checking your draft…';
+  dialog.showModal();
   try {
     validateContent(data);
     if(stale) throw Error('This draft is based on an older version. Download a backup, then reset and reapply your changes to the current content.');
-    const b=byId<HTMLButtonElement>('publish');b.disabled=true;b.textContent='Checking current content…';
+    const b=byId<HTMLButtonElement>('publish');b.disabled=true;b.textContent='Checking current content…';feedback.textContent='Checking the latest GitHub content…';
     try {
       const response=await fetch(`https://raw.githubusercontent.com/SpaghettiSans/game-programmer-portfolio/main/src/data/content.json?t=${Date.now()}`,{cache:'no-store',signal:AbortSignal.timeout(12000)});
       if(!response.ok)throw Error('Could not check the latest GitHub content. Please try again.');
       const latest=await response.json();
       if(fingerprint(latest)!==baseline && fingerprint(latest)!==fingerprint(data))throw Error('GitHub has newer content. Download your draft as a backup and reload this editor before publishing to avoid overwriting it.');
-      byId<HTMLTextAreaElement>('publish-json').value=JSON.stringify(data,null,2)+'\n';byId('copy-status').textContent='';message('');dialog.showModal();
+      byId<HTMLTextAreaElement>('publish-json').value=JSON.stringify(data,null,2)+'\n';byId('copy-status').textContent='';message('');feedback.textContent='Your draft is ready. Follow these steps to publish it.';steps.hidden=false;
     } finally {b.disabled=false;b.textContent='Publish changes ↗';}
-  } catch(error){message(error instanceof Error?error.message:'Unable to prepare publishing.');alert.scrollIntoView({block:'center'});}
+  } catch(error){const reason=error instanceof Error?error.message:'Unable to prepare publishing.';feedback.textContent=reason+' Your draft has been kept. Close this window to continue editing or download a backup.';message(reason);}
 });
 byId('copy-content').addEventListener('click',async()=>{
   const text=byId<HTMLTextAreaElement>('publish-json');
