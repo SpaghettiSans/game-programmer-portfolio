@@ -4,20 +4,20 @@
     "headline": "Building the systems behind the play.",
     "intro": "I’m a game programmer interested in creating responsive gameplay, reusable systems that connects, to create memorable player experiences.",
     "about": "I’m interested in the details that make a game feel good to play: responsive controls, thoughtful interactions, and systems that work together.",
-    "approach": "This space is for my story: how I approach a difficult problem, what I enjoy building, and what draws me to game programming. I’ll add that story alongside my work.",
+    "approach": "I enjoy building responsive movement and combat systems, refining them through playtesting until they feel satisfying. I approach difficult problems by breaking them into smaller parts and testing one change at a time, while building reusable components that make new features easier to add. Gameplay programming draws me in because it combines technical problem-solving with creating experiences players can feel.",
     "email": "sandee.srisawat2003@gmail.com",
     "github": "https://github.com/SpaghettiSans",
     "itch": "https://spaghettisanz.itch.io",
     "linkedin": "https://www.linkedin.com/in/sandee-srisawat-888886305",
-    "resume": null,
-    "portrait": null,
+    "resume": "/game-programmer-portfolio/CV.pdf",
+    "portrait": "/game-programmer-portfolio/Portrait.png",
     "heroMedia": null,
     "heroMediaType": "image",
     "heroMediaAlt": "Gameplay footage from a featured project",
     "heroCaptions": null,
     "heroTranscript": null,
-    "aboutConfirmed": false,
-    "skillsConfirmed": false,
+    "aboutConfirmed": true,
+    "skillsConfirmed": true,
     "siteUrl": "https://spaghettisans.github.io"
   },
   "projects": [
@@ -29,9 +29,9 @@
       "description": "A space to explore a character controller, combat mechanic, or interaction system.",
       "role": "Individual contribution to be added",
       "engine": "Unity",
-      "language": "Language TBC",
-      "type": "Prototype · example",
-      "team": "To be confirmed",
+      "language": "C#",
+      "type": "Solo",
+      "team": "1",
       "duration": "3 weeks",
       "theme": "terrain",
       "media": null,
@@ -64,7 +64,7 @@
       "number": "02",
       "category": "Game Logic",
       "title": "Excorcism Of Elizabeth",
-      "description": "A space to explain enemy behavior, decision-making, or an interconnected gameplay system.",
+      "description": "I was responsible for designing and implementing the core interaction, inventory, and time-based event systems for Excorcism of Elizabeth, building a modular and multiplaye-architecture that allowed any actor in the world to become interactable without coupling it to the player character.",
       "role": "Lead Programmer",
       "engine": "Unreal Engine",
       "language": "Unreal Blueprints",
@@ -72,9 +72,9 @@
       "team": "13",
       "duration": "7 weeks",
       "theme": "logic",
-      "media": "/game-programmer-portfolio/images/elizabeth/EOE_1.png",
+      "media": null,
       "mediaType": "image",
-      "mediaAlt": "Exorcism of Elizabeth promotional artwork",
+      "mediaAlt": "",
       "play": null,
       "source": null,
       "trailer": null,
@@ -99,7 +99,7 @@
         {
           "src": "/game-programmer-portfolio/images/elizabeth/EOE_1.png",
           "type": "image",
-          "alt": "Exorcism of Elizabeth promotional artwork",
+          "alt": "Cover Art",
           "caption": "",
           "captions": null,
           "transcript": null
@@ -107,7 +107,7 @@
         {
           "src": "/game-programmer-portfolio/images/elizabeth/EOE_2.png",
           "type": "image",
-          "alt": "First-person gameplay inside the mansion, with a ritual circle and stacked televisions",
+          "alt": "Gameplay image",
           "caption": "",
           "captions": null,
           "transcript": null
@@ -115,7 +115,7 @@
         {
           "src": "/game-programmer-portfolio/images/elizabeth/EOE_3.png",
           "type": "image",
-          "alt": "Purple-lit gameplay scene with floating objects",
+          "alt": "Gameplay image",
           "caption": "",
           "captions": null,
           "transcript": null
@@ -127,14 +127,14 @@
       "number": "03",
       "category": "Gameplay Systems",
       "title": "Zombid - 19",
-      "description": "A space to share a development tool, technical prototype, or optimization experiment.",
+      "description": "I was responsible for designing and implementing the slot-based inventory system for Zombid-19 and integrating a designer-provided gun template with it, extending the system with ammunition management, reloading, weapon switching, and audio/visual feedback.",
       "role": "Gameplay Programmer",
       "engine": "Engine TBC",
       "language": "Language TBC",
       "type": "Team",
-      "team": "To be confirmed",
-      "duration": "To be confirmed",
-      "theme": "tools",
+      "team": "9",
+      "duration": "4 weeks",
+      "theme": "logic",
       "media": null,
       "mediaType": "image",
       "mediaAlt": "Development tool screenshot",
@@ -145,9 +145,11 @@
       "sample": false,
       "overview": "This is a sample project breakdown, ready for a real project. The prompts below describe what to add; they do not represent completed work or experience.",
       "contributions": [
-        "Describe the feature you personally implemented and what it enabled for the player.",
-        "Explain your implementation choices and how your work connected with the rest of the project.",
-        "Separate your own contributions from the work of teammates."
+        "Built inventory slot system for storing, stacking, selecting, and using items.",
+        "Connected a designer-provided gun template to our inventory, enabling weapon switching and preserving ammunition counts.",
+        "Extended the gun system with inventory-based reloading, reload cancellation, and shotgun spread.",
+        "Integrated weapon sounds, muzzle flashes, camera shake, and bullet tracers using existing assets and components.",
+        "Added reload progress feedback to the player interface."
       ],
       "problem": "Describe a specific technical constraint or gameplay problem you encountered.",
       "solution": "Explain the options you considered, the approach you chose, and the tradeoffs involved.",
@@ -157,8 +159,25 @@
       "code": null,
       "captions": null,
       "transcript": null,
-      "challengesTakeaways": "Describe a specific technical constraint or gameplay problem you encountered.\n\nExplain the options you considered, the approach you chose, and the tradeoffs involved.\n\nAdd the observed result and supporting evidence. Include performance numbers only when measured.\n\nExplain what this project taught you and what you would change in a future iteration.",
-      "showcase": []
+      "challengesTakeaways": "With limited time, I extended the gun template and connected it to our custom inventory. This saved development time but required adapting unfamiliar logic.\n\nIncompatible weapon skeletons made muzzle sockets unreliable. I used individually positioned MuzzlePoint components as a practical workaround.\n\nI learned to connect separate gameplay systems, handle interrupted actions, and prioritise features within our deadline.",
+      "showcase": [
+        {
+          "src": "/game-programmer-portfolio/Zombid_1.png",
+          "type": "image",
+          "alt": "In-game screenshot",
+          "caption": "",
+          "captions": null,
+          "transcript": null
+        },
+        {
+          "src": "/game-programmer-portfolio/Zombid_2.png",
+          "type": "image",
+          "alt": "In-game screenshot",
+          "caption": "",
+          "captions": null,
+          "transcript": null
+        }
+      ]
     }
   ],
   "skills": [
