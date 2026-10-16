@@ -61,6 +61,14 @@
       "challengesTakeaways": "One challenge was reliably switching sun damage on and off as the player moved between exposed and shaded areas. I placed colliders to define safe areas, preventing sun damage while the player was inside and resuming it when they left.\n\nAnother challenge was connecting health, armor, obstacles, and environmental damage without tightly coupling their components. I used an event-driven system so components could react to gameplay events while keeping their responsibilities separate.",
       "showcase": [
         {
+          "src": "/game-programmer-portfolio/SS_0.png",
+          "type": "image",
+          "alt": "SeaShelt game preview",
+          "caption": "",
+          "captions": null,
+          "transcript": null
+        },
+        {
           "src": "/game-programmer-portfolio/SS_1.png",
           "type": "image",
           "alt": "In-game",
