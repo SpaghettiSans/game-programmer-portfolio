@@ -91,7 +91,33 @@
       "diagram": null,
       "code": null,
       "captions": null,
-      "transcript": null
+      "transcript": null,
+      "showcase": [
+        {
+          "src": "/game-programmer-portfolio/images/elizabeth/EOE_1.png",
+          "type": "image",
+          "alt": "Exorcism of Elizabeth promotional artwork",
+          "caption": "",
+          "captions": null,
+          "transcript": null
+        },
+        {
+          "src": "/game-programmer-portfolio/images/elizabeth/EOE_2.png",
+          "type": "image",
+          "alt": "First-person gameplay inside the mansion, with a ritual circle and stacked televisions",
+          "caption": "",
+          "captions": null,
+          "transcript": null
+        },
+        {
+          "src": "/game-programmer-portfolio/images/elizabeth/EOE_3.png",
+          "type": "image",
+          "alt": "Purple-lit gameplay scene with floating objects",
+          "caption": "",
+          "captions": null,
+          "transcript": null
+        }
+      ]
     },
     {
       "slug": "tools-experiments",
