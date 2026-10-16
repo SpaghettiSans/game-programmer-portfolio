@@ -72,9 +72,9 @@
       "team": "13",
       "duration": "7 weeks",
       "theme": "logic",
-      "media": null,
+      "media": "/game-programmer-portfolio/images/elizabeth/EOE_1.png",
       "mediaType": "image",
-      "mediaAlt": "",
+      "mediaAlt": "Exorcism of Elizabeth promotional artwork",
       "play": null,
       "source": null,
       "trailer": null,
@@ -95,7 +95,32 @@
       "captions": null,
       "transcript": null,
       "challengesTakeaways": "The biggest challenge was making the interaction system work in multiplayer. Calls made directly from the client on world actors get silently dropped by Unreal since the client doesn't own them. I solved this by moving the Server RPC onto the player's own component, which then calls the interface on the item from the server. This taught me how Unreal's ownership model works and why multiplayer architecture needs to be considered from the start.",
-      "showcase": []
+      "showcase": [
+        {
+          "src": "/game-programmer-portfolio/images/elizabeth/EOE_1.png",
+          "type": "image",
+          "alt": "Exorcism of Elizabeth promotional artwork",
+          "caption": "",
+          "captions": null,
+          "transcript": null
+        },
+        {
+          "src": "/game-programmer-portfolio/images/elizabeth/EOE_2.png",
+          "type": "image",
+          "alt": "First-person gameplay inside the mansion, with a ritual circle and stacked televisions",
+          "caption": "",
+          "captions": null,
+          "transcript": null
+        },
+        {
+          "src": "/game-programmer-portfolio/images/elizabeth/EOE_3.png",
+          "type": "image",
+          "alt": "Purple-lit gameplay scene with floating objects",
+          "caption": "",
+          "captions": null,
+          "transcript": null
+        }
+      ]
     },
     {
       "slug": "zombid-19",
